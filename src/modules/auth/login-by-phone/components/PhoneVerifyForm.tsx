@@ -1,6 +1,6 @@
 "use client";
 
-import { ROOTS_HOME } from "@/app/core/routes";
+import { PATH_AUTH, ROOTS_HOME } from "@/app/core/routes";
 import {
   Box,
   Flex,
@@ -12,7 +12,15 @@ import {
   IconButton,
   useBreakpointValue,
 } from "@chakra-ui/react";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
 import { FiArrowLeft } from "react-icons/fi";
+import * as yup from "yup";
+
+const formSchema = yup.object().shape({
+  phoneOtp: yup.string().required("Phone OTP is required"),
+});
 
 interface PhoneVerifyFormProps {
   onBack: () => void;
@@ -20,6 +28,20 @@ interface PhoneVerifyFormProps {
 
 export const PhoneVerifyForm = ({ onBack }: PhoneVerifyFormProps) => {
   const boxWidth = useBreakpointValue({ base: "90vw", sm: "400px" });
+  const router = useRouter();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(formSchema),
+  });
+
+  const onSubmit = (data: any) => {
+    console.log(data);
+    router.push(PATH_AUTH.selectDashboard);
+  };
 
   const handleBack = () => {
     onBack();
@@ -40,10 +62,24 @@ export const PhoneVerifyForm = ({ onBack }: PhoneVerifyFormProps) => {
       <Text color="gray.500" textAlign="center" mb={6}>
         Please enter the code sent to your phone
       </Text>
-      <Input placeholder="Your Phone Number" size="lg" mb={4} type="tel" />
-      <Button className="text-white w-full" colorScheme="blue">
+      <Input
+        placeholder="Your Phone Number"
+        size="lg"
+        mb={4}
+        type="tel"
+        {...register("phoneOtp")}
+      />
+      {errors.phoneOtp && (
+        <Text className="text-red-500 text-sm">{errors.phoneOtp.message}</Text>
+      )}
+      <Button
+        className="text-white w-full"
+        colorScheme="blue"
+        onClick={handleSubmit(onSubmit)}
+      >
         Submit
       </Button>
+
       <Text className="flex items-center pt-2 justify-center text-sm text-gray-500">
         passwordless authentication methods.
       </Text>

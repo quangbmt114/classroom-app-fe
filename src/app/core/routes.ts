@@ -7,4 +7,5 @@ const ROOTS_AUTH = "/auth";
 export const PATH_AUTH = {
   loginByPhone: path(ROOTS_AUTH, "/login-by-phone"),
   loginByEmail: path(ROOTS_AUTH, "/login-by-email"),
+  selectDashboard: path(ROOTS_AUTH, "/select-dashboard"),
 };

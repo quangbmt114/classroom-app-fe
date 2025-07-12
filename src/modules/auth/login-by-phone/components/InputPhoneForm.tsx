@@ -12,16 +12,34 @@ import {
   IconButton,
   useBreakpointValue,
 } from "@chakra-ui/react";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
 import { FiArrowLeft } from "react-icons/fi";
+import * as yup from "yup";
 
 interface InputPhoneFormProps {
   onNext: () => void;
 }
 
+const formSchema = yup.object().shape({
+  phone: yup.string().required("Phone is required"),
+});
+
 export const InputPhoneForm = ({ onNext }: InputPhoneFormProps) => {
   const boxWidth = useBreakpointValue({ base: "90vw", sm: "400px" });
+  const router = useRouter();
 
-  const handleNext = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(formSchema),
+  });
+
+  const onSubmit = (data: any) => {
+    console.log(data);
     onNext();
   };
 
@@ -40,11 +58,21 @@ export const InputPhoneForm = ({ onNext }: InputPhoneFormProps) => {
       <Text color="gray.500" textAlign="center" mb={6}>
         Please enter your phone to sign in
       </Text>
-      <Input placeholder="Your Phone Number" size="lg" mb={4} type="tel" />
+      <Input
+        placeholder="Your Phone Number"
+        size="lg"
+        mb={4}
+        type="tel"
+        {...register("phone")}
+      />
+      {errors.phone && (
+        <Text className="text-red-500 text-sm">{errors.phone.message}</Text>
+      )}
+
       <Button
         className="text-white w-full"
         colorScheme="blue"
-        onClick={handleNext}
+        onClick={handleSubmit(onSubmit)}
       >
         Next
       </Button>
