@@ -40,7 +40,7 @@ export const LoginByPhoneFeature = () => {
           passwordless authentication methods.
         </Text>
         <Text className="text-sm pt-4">
-          Don't having account?{" "}
+          Don&apos;t having account?{" "}
           <Link className="text-blue-500" href="#">
             Sign up
           </Link>
