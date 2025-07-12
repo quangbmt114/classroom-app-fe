@@ -6,13 +6,24 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "start:static": "npx serve@latest out",
     "lint": "next lint"
   },
   "dependencies": {
+    "@chakra-ui/next-js": "^2.4.2",
+    "@chakra-ui/react": "2",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
     "axios": "^1.10.0",
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.23.3",
     "next": "15.3.5",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-hook-form": "^7.60.0",
+    "react-icons": "^5.5.0",
+    "tailwind-merge": "^3.3.1",
+    "yup": "^1.6.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
