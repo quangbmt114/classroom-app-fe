@@ -21,7 +21,7 @@ export const LoginFeature = () => {
           </Button>
         </Link>
 
-        <Link href={PATH_AUTH.loginByMail} className="w-full">
+        <Link href={PATH_AUTH.loginByEmail} className="w-full">
           <Button
             className={
               "w-full h-12 border-gray-100 rounded-lg border-2 lg:h-16"
