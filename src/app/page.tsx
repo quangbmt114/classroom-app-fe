@@ -27,7 +27,7 @@ export default function Home() {
           </Tooltip>
 
           <Tooltip label="Login by email">
-            <Link href={PATH_AUTH.loginByMail} className="w-full">
+            <Link href={PATH_AUTH.loginByEmail} className="w-full">
               <Button className="px-4 w-full h-20 border-gray-100 rounded-lg border-2 lg:h-20">
                 <FiMail className="text-2xl" />
               </Button>
